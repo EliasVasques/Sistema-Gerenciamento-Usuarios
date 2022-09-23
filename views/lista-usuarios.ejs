@@ -22,6 +22,12 @@
                 <th scope="row">1</th>
                 <td><%= usuario.nome %></td>
                 <td><%= usuario.email %></td>
+                <td><%= usuario.sexo %></td>
+                <td><%= usuario.status %></td>
+                <td class="acoes"> 
+                  <a href="/usuarios/editar/<%= usuario._id %>"><i class="icon-edit"></i></a>
+                  <a href=""><i class="icon-trash"></i></a>
+                </td>
               </tr>
           <% })%>
         </tbody>

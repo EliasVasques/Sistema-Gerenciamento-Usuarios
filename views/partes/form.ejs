@@ -1,0 +1,35 @@
+<form method="post" action="<%= action %>">
+    <div class="form-group">
+      <label for="nome">Nome</label>
+      <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome" value="<%= usuario.nome %>">
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" class="form-control" id="email" name="email" placeholder="Email"value="<%= usuario.email %>">
+    </div>
+    
+    <div class="form-group">
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="sexo" id="inlineRadio1" value="m" <% if(usuario.sexo == 'm') { %> <%= 'checked' %> <% } %> >
+        <label class="form-check-label" for="inlineRadio1">Masculino</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="sexo" id="inlineRadio2" value="f" <% if(usuario.sexo == 'f') { %> <%= 'checked' %> <% } %> >
+        <label class="form-check-label" for="inlineRadio2">Feminino</label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="status" id="inlineRadio3" value="ativo" <% if(usuario.status == 'ativo') { %> <%= 'checked' %> <% } %> >
+        <label class="form-check-label" for="inlineRadio3">Ativo</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="status" id="inlineRadio4" value="inativo" <% if(usuario.status == 'inativo') { %> <%= 'checked' %> <% } %>>
+        <label class="form-check-label" for="inlineRadio4">Inativo</label>
+      </div>
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
