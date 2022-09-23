@@ -13,13 +13,16 @@ const usuarioDefault = {
 }
 
 router.get('/', (req, res)  => {
+    let { msg } = req.query; 
+    if(msg) msg = msg.split('-').join(' ')
+    else msg = '';
     UsuarioSchema.find()
-        .then(usuarios => res.render('lista-usuarios', { usuarios: usuarios }))
+        .then(usuarios => res.render('lista-usuarios', { msg: msg, usuarios: usuarios }))
         .catch(err => console.log(err))
 })
 
 router.get('/add', (req, res) => {
-    res.render('add-usuarios.ejs', { msg: "",  usuario: usuarioDefault  })
+    res.render('add-usuarios.ejs', { msg: '',  usuario: usuarioDefault  })
 })
 
 router.post('/add', (req, res)  => {
@@ -48,11 +51,11 @@ router.get('/editar/:id',(req, res) => {
 
 router.put('/editar/:id',(req, res) => {
     if(ObjectId.isValid(req.params.id)) {
-        UsuarioSchema.findByIdAndUpdate({ _id: ObjectId(req.params.id) }, req.body)
+        UsuarioSchema.findByIdAndUpdate( ObjectId(req.params.id), req.body)
             .then(() => res.render('editar-usuarios.ejs', { msg: "Atualizado com sucesso!", usuario: req.body }))
             .catch(err => {
                 console.log(err)
-                res.render('editar-usuarios.ejs', { msg: "Usuário não encontrado!", usuario: usuarioDefault})
+                res.render('editar-usuarios.ejs', { msg: "Erro ao atualizar usuario!", usuario: usuarioDefault})
             })
     } else {
         res.render('editar-usuarios.ejs', { msg: "Id inválido!", usuario: usuarioDefault  })
@@ -60,17 +63,18 @@ router.put('/editar/:id',(req, res) => {
 })
 
 router.delete('/deletar/:id',(req, res) => {
-    res.send('deletando')
-    /*if(ObjectId.isValid(req.params.id)) {
-        UsuarioSchema.findByIdAndUpdate({ _id: ObjectId(req.params.id) }, req.body)
-            .then(() => res.render('editar-usuarios.ejs', { msg: "Atualizado com sucesso!", usuario: req.body }))
+    if(ObjectId.isValid(req.params.id)) {
+        UsuarioSchema.findByIdAndDelete( ObjectId(req.params.id))
+            .then(() => {
+                res.redirect('/usuarios?msg=Usuario-deletado-com-sucesso');
+            })
             .catch(err => {
                 console.log(err)
-                res.render('editar-usuarios.ejs', { msg: "Usuário não encontrado!", usuario: usuarioDefault})
+                res.redirect('/usuarios?msg=Erro-deletar-usuario');
             })
     } else {
-        res.render('editar-usuarios.ejs', { msg: "Id inválido!", usuario: usuarioDefault  })
-    }*/
+        res.redirect('/usuarios?msg=Id-invalido')
+    }
 })
 
 module.exports  = router

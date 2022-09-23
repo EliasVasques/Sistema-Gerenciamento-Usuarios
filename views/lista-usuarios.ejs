@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-br">
     <%- include('./partes/head.ejs') %>
-    <%- include('./partes/menu-top.ejs') %>
-
-    <a class="btn btn-primary" href="/usuarios/add" role="button">Novo Usuario</a>
+    
     <body>
+      <%- include('./partes/menu-top.ejs') %>
+      <%- include('./partes/alerta.ejs') %>
+      
+      <a class="btn btn-primary" href="/usuarios/add" role="button">Novo Usuario</a>
+
       <table class="table">
         <thead>
           <tr>

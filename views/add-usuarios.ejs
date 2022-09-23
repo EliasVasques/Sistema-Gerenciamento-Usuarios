@@ -1,14 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt-br">
     <%- include('./partes/head.ejs') %>
-    <%- include('./partes/menu-top.ejs') %>
-
+    
     <body>
-        <% if(msg !== '') { %>
-          <div class="alert alert-primary" role="alert">
-            <%= msg %>
-          </div>
-        <% } %>
+        <%- include('./partes/menu-top.ejs') %>
+        <%- include('./partes/alerta.ejs') %>
 
         <a class="btn btn-primary" href="/usuarios" role="button">Todos usuarios</a>
         
