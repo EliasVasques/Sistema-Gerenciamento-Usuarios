@@ -11,7 +11,6 @@ const usuarioDefault = {
     status: '',
     _id: ''
 }
-// sudo systemctl start mongod
 
 router.get('/', (req, res)  => {
     UsuarioSchema.find()
@@ -47,7 +46,7 @@ router.get('/editar/:id',(req, res) => {
     }
 })
 
-router.post('/editar/:id',(req, res) => {
+router.put('/editar/:id',(req, res) => {
     if(ObjectId.isValid(req.params.id)) {
         UsuarioSchema.findByIdAndUpdate({ _id: ObjectId(req.params.id) }, req.body)
             .then(() => res.render('editar-usuarios.ejs', { msg: "Atualizado com sucesso!", usuario: req.body }))
@@ -60,5 +59,18 @@ router.post('/editar/:id',(req, res) => {
     }
 })
 
+router.delete('/deletar/:id',(req, res) => {
+    res.send('deletando')
+    /*if(ObjectId.isValid(req.params.id)) {
+        UsuarioSchema.findByIdAndUpdate({ _id: ObjectId(req.params.id) }, req.body)
+            .then(() => res.render('editar-usuarios.ejs', { msg: "Atualizado com sucesso!", usuario: req.body }))
+            .catch(err => {
+                console.log(err)
+                res.render('editar-usuarios.ejs', { msg: "Usuário não encontrado!", usuario: usuarioDefault})
+            })
+    } else {
+        res.render('editar-usuarios.ejs', { msg: "Id inválido!", usuario: usuarioDefault  })
+    }*/
+})
 
 module.exports  = router

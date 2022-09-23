@@ -26,7 +26,9 @@
                 <td><%= usuario.status %></td>
                 <td class="acoes"> 
                   <a href="/usuarios/editar/<%= usuario._id %>"><i class="icon-edit"></i></a>
-                  <a href=""><i class="icon-trash"></i></a>
+                  <form method="POST" action="/usuarios/deletar/<%= usuario._id %>?_method=DELETE" class="butao-form">
+                    <button type="submit" class="icon-trash"></button>
+                  </form>
                 </td>
               </tr>
           <% })%>
